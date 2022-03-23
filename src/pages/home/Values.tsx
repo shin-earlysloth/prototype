@@ -6,7 +6,7 @@ import EChartsReact from "echarts-for-react";
 import { useGetGraphData } from "../query/modules/reactQuery/useGetGraphData";
 import styled from "@emotion/styled";
 import { useEffect } from "react";
-import useDountChart from "../query/modules/graphs/DountEChart";
+
 import DountGraph from "./Graphs/DountGraph";
 
 const Values = () => {
@@ -17,7 +17,7 @@ const Values = () => {
 
   return (
     <>
-      <DountGraph graphData={graphData} width={200} />
+      adf
     </>
   );
 };
