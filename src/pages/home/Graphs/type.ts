@@ -12,6 +12,12 @@ export type MultiPieChartType = {
   charts: MultiPieChartDataType[][];
 };
 
+export const isMultiPieChartType = (
+  v: GroupDataType
+): v is MultiPieChartType => {
+  return v.type === "multi_pie";
+};
+
 type MultiPieChartDataType = {
   name: string;
   value: number;
@@ -45,3 +51,26 @@ export type VerticalType = {
   xAxis: string[];
   values: number[];
 };
+
+type BarLineSeriesType = {
+  name: string;
+  format?: string;
+  values: number[];
+};
+
+export type BarLineType = {
+  type: "line_bar";
+  xAxis: string[];
+  series: BarLineSeriesType[];
+};
+
+export const isBarLineType = (v: GroupDataType): v is BarLineType => {
+  return v.type === "line_bar";
+};
+
+export type GroupDataType =
+  | MultiPieChartType
+  | BarLineType
+  | VerticalType
+  | LineSmothType
+  | RadarChartType;
