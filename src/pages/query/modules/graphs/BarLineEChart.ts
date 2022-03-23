@@ -1,4 +1,5 @@
 import { EChartsOption } from "echarts";
+import ChartError, { ErrorCode } from "../../../home/error";
 import { BarLineType } from "../../../home/Graphs/type";
 import ChartUtil from "./ChartUtil";
 
@@ -40,19 +41,25 @@ class BarLineEChart extends ChartUtil {
   }
 
   private getSeriesOption(): EChartsOption["series"] {
-    const chartSeries = this.getChartData();
-    if (chartSeries === undefined) throw new Error("차트 데이터가 없습니다.");
+    try {
+      const chartSeries = this.getChartData();
 
-    return [
-      {
-        type: "bar",
-        ...chartSeries[0],
-      },
-      {
-        type: "line",
-        ...chartSeries[1],
-      },
-    ];
+      if (chartSeries === undefined || chartSeries.length === 0)
+        throw new ChartError(ErrorCode.E1);
+
+      return [
+        {
+          type: "bar",
+          ...chartSeries[0],
+        },
+        {
+          type: "line",
+          ...chartSeries[1],
+        },
+      ];
+    } catch (err) {
+      throw new ChartError(ErrorCode.E1);
+    }
   }
 }
 
