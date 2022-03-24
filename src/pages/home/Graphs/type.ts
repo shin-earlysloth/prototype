@@ -74,3 +74,7 @@ export type GroupDataType =
   | VerticalType
   | LineSmothType
   | RadarChartType;
+export type QudrantType = {
+  type: "quadrant";
+  data: [number, number][];
+};
