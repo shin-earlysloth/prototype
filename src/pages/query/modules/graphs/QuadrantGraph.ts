@@ -27,7 +27,7 @@ class QuadrantGraphUtil extends ChartUtil {
 
 class QuadrantGraph extends QuadrantGraphUtil {
   private readonly option: EChartsOption = {};
-  constructor(protected readonly graphData: QudrantType | undefined) {
+  constructor(protected readonly graphData: QudrantType) {
     super(graphData);
   }
 

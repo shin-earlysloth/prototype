@@ -4,7 +4,8 @@ export type graphType =
   | "line_smoth"
   | "vertical"
   | "line_bar"
-  | "quadrant";
+  | "quadrant"
+  | "stack";
 
 export type MultiPieChartType = {
   type: "multi_pie";
@@ -27,21 +28,16 @@ type MultiPieChartDataType = {
 export type RadarChartType = {
   type: "radar";
   xAxis: string[];
-  series: RadarChartDataType[];
-};
-
-type RadarChartDataType = {
-  name: string;
-  values: number[];
+  series: MultiDataChartType[];
 };
 
 export type LineSmothType = {
   type: "line_smoth";
   xAxis: string[];
-  series: LineSmothDataType;
+  series: MultiDataChartType[];
 };
 
-type LineSmothDataType = {
+type MultiDataChartType = {
   name: string;
   values: number[];
 };
@@ -52,29 +48,35 @@ export type VerticalType = {
   values: number[];
 };
 
-type BarLineSeriesType = {
-  name: string;
-  format?: string;
-  values: number[];
+export type QudrantType = {
+  type: "quadrant";
+  data: [number, number][];
+};
+
+export type StackType = {
+  type: "stack";
+  xAxis: string[];
+  series: MultiDataChartType[];
 };
 
 export type BarLineType = {
   type: "line_bar";
   xAxis: string[];
-  series: BarLineSeriesType[];
-};
-
-export const isBarLineType = (v: GroupDataType): v is BarLineType => {
-  return v.type === "line_bar";
+  format: string;
+  series: MultiDataChartType[];
 };
 
 export type GroupDataType =
   | MultiPieChartType
-  | BarLineType
-  | VerticalType
+  | RadarChartType
   | LineSmothType
-  | RadarChartType;
-export type QudrantType = {
-  type: "quadrant";
-  data: [number, number][];
-};
+  | VerticalType
+  | QudrantType
+  | StackType
+  | BarLineType;
+
+export const isBarLineType = (v: GroupDataType): v is BarLineType =>
+  v.type === "line_bar";
+
+export const isRadarType = (v: GroupDataType): v is RadarChartType =>
+  v.type === "radar";
